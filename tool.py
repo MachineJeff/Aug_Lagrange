@@ -23,7 +23,7 @@ def armijo_backtracking(function, x, loss, gradient, direction, step, data):
     return alpha, x_next, loss_next, gradient_next
 
 def Aug_Lagrange_Function(x, f, eqc_list, lambd, mu):
-    lag = sum(eqc_list[i](x) * lambd[i] for i in range(len(eqc_list)))
-    pen = sum(func(x) ** 2 for func in eqc_list)
-    result = np.sqrt(np.square(f(x))) - lag + mu/2.0 * pen
+    lagrange_term = sum(eqc_list[i](x) * lambd[i] for i in range(len(eqc_list)))
+    penality_term = sum(func(x) ** 2 for func in eqc_list)
+    result = np.sqrt(np.square(f(x))) - lagrange_term + mu/2.0 * penality_term
     return result
