@@ -9,7 +9,7 @@ from fit.TQ import T, Q
 from tool import Aug_Lagrange_Function, armijo_backtracking
 import numpy as np
 
-T0 = 0.1
+T0 = 15
 
 def obj_f(x):
     return x[0]*x[2]*Q([x[0],x[1],x[2]])
@@ -74,8 +74,18 @@ for epoch in range(10):
                                                                          search_direction, 1, p)
         param_this = param_next
         if abs(loss_this - loss_next) < 10e-6 or abs(np.linalg.norm(gradient_next)) < 0.01:
-            # print(f'Current epoch {epoch+1}')
-            # print(f'Loss {loss_next:.5f}')
+            print('--------------------------------')
+            print(f'Current epoch {epoch+1}')
+            print(f'Loss {loss_next:.5f}')
+            print(np.round(param_next[:3], 3))
+            print(f'T0 = {np.round(c7(param_next) + T0, 3)}')
+            print(f'c1 = {np.round(c1(param_next), 3)}')
+            print(f'c2 = {np.round(c2(param_next), 3)}')
+            print(f'c3 = {np.round(c3(param_next), 3)}')
+            print(f'c4 = {np.round(c4(param_next), 3)}')
+            print(f'c5 = {np.round(c5(param_next), 3)}')
+            print(f'c6 = {np.round(c6(param_next), 3)}')
+            print('Object funtion value: {}'.format(np.round(obj_f(param_next), 5)))
             break
     if abs(np.linalg.norm(gradient_next)) < 0.01:
         break
