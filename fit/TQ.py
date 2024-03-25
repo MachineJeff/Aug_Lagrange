@@ -38,4 +38,9 @@ def Q(input_data):
         output = model_Q(input_data)
     return output.item()
 
+if __name__ == '__main__':
+    t = T([1.1,7.25,2.99]) # real T = 6.3
+    q = Q([1.1,7.25,2.99]) # real Q = 14.8
+    print(np.round(t, 1))
+    print(np.round(q, 1))
 
