@@ -26,4 +26,4 @@ if __name__ == '__main__':
     print(f'Max value in T: {np.max(T)}')
     print(f'Min value in T: {np.min(T)}')
     print(f'Max value in Q: {np.max(Q)}')
-    print(f'Min value in T: {np.min(Q)}')
+    print(f'Min value in Q: {np.min(Q)}')
