@@ -27,3 +27,6 @@ if __name__ == '__main__':
     print(f'Min value in T: {np.min(T)}')
     print(f'Max value in Q: {np.max(Q)}')
     print(f'Min value in Q: {np.min(Q)}')
+    Dn = tri_data[:, [0, 2]]
+    efficiecy = np.power(T, 2.0/3.0) / (np.prod(Dn, axis=1) * Q)
+    print(np.max(efficiecy))
