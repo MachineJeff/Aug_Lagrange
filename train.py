@@ -9,7 +9,12 @@ from fit.TQ import T, Q
 from tool import Aug_Lagrange_Function, armijo_backtracking
 import numpy as np
 
-T0 = 15
+T0 = 2.0
+
+def efficiency(x):
+    upper = np.power(T0, 2.0/3.0)
+    bottom = obj_f(x)
+    return np.round(upper/bottom, 3)
 
 def obj_f(x):
     return x[0]*x[2]*Q([x[0],x[1],x[2]])
@@ -59,7 +64,7 @@ param_this = np.array([1.,0.,1.,np.sqrt(3),np.sqrt(10),np.sqrt(6),0.,0.,0.]).ast
 lambd = np.ones(7)
 mu = 2
 epoch = 0
-for epoch in range(10):
+for epoch in range(30):
     count = 0
     p = [lambd, mu]
     while True:
@@ -87,15 +92,13 @@ for epoch in range(10):
             print(f'c6 = {np.round(c6(param_next), 3)}')
             print('Object funtion value: {}'.format(np.round(obj_f(param_next), 5)))
             break
-    if abs(np.linalg.norm(gradient_next)) < 0.01:
+    if abs(np.linalg.norm(gradient_next)) < 10e-6:
         break
 
     lambd = lambd - np.array([mu*func(param_next) for func in eqc_list])
     mu *= 2
 
+print('--------------------------------')
 print(f'For T0 = {T0:.2f}, solution:')
-print(np.round(param_next[:3], 5))
-print('Object funtion value: {}'.format(np.round(obj_f(param_next), 5)))
-
-
-
+print(np.round(param_next[:3], 4))
+print('Max power efficiency: {}'.format(efficiency(param_next)))
