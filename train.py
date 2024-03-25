@@ -9,12 +9,12 @@ from fit.TQ import T, Q
 from tool import Aug_Lagrange_Function, armijo_backtracking
 import numpy as np
 
-T0 = 2.0
+T0 = 3.5
 
 def efficiency(x):
     upper = np.power(T0, 2.0/3.0)
     bottom = obj_f(x)
-    return np.round(upper/bottom, 3)
+    return np.round(upper/bottom, 4)
 
 def obj_f(x):
     return x[0]*x[2]*Q([x[0],x[1],x[2]])
@@ -100,5 +100,5 @@ for epoch in range(30):
 
 print('--------------------------------')
 print(f'For T0 = {T0:.2f}, solution:')
-print(np.round(param_next[:3], 4))
+print(f'[{np.round(param_next[0], 4)}, {np.round(param_next[1], 4)}, {np.round(param_next[2], 4)}]')
 print('Max power efficiency: {}'.format(efficiency(param_next)))
